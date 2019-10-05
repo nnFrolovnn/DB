@@ -2,8 +2,8 @@ use AdventureWorks2012;
 go
 
 /*
- *Вывести на экран самую раннюю дату начала работы сотрудника в каждом отделе. 
- *Дату вывести для каждого отдела.
+ *В¬С‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ СЃР°РјСѓСЋ СЂР°РЅРЅСЋСЋ РґР°С‚Сѓ РЅР°С‡Р°Р»Р° СЂР°Р±РѕС‚С‹ СЃРѕС‚СЂСѓРґРЅРёРєР° РІ РєР°Р¶РґРѕРј РѕС‚РґРµР»Рµ. 
+ *?Р°С‚Сѓ РІС‹РІРµСЃС‚Рё РґР»В¤ РєР°Р¶РґРѕРіРѕ РѕС‚РґРµР»Р°.
 */
 select d.Name, Min(e.HireDate) "StartDate" from HumanResources.Department as d 
 inner join HumanResources.EmployeeDepartmentHistory as edh on(d.DepartmentID = edh.DepartmentID)
@@ -12,8 +12,8 @@ group by d.Name;
 go
 
 /*
- *Вывести на экран название смены сотрудников, работающих на позиции ‘Stocker’. 
- *Замените названия смен цифрами (Day — 1; Evening — 2; Night — 3).
+ *В¬С‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ РЅР°Р·РІР°РЅРёРµ СЃРјРµРЅС‹ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ, СЂР°Р±РѕС‚Р°СЋС‰РёС… РЅР° РїРѕР·РёС†РёРё РЎStockerРў. 
+ *В«Р°РјРµРЅРёС‚Рµ РЅР°Р·РІР°РЅРёВ¤ СЃРјРµРЅ С†РёС„СЂР°РјРё (Day Р§ 1; Evening Р§ 2; Night Р§ 3).
 */
 select e.BusinessEntityID, e.JobTitle, s.ShiftID "ShiftName" from HumanResources.Employee as e
 inner join HumanResources.EmployeeDepartmentHistory as edh on e.BusinessEntityID = edh.BusinessEntityID
@@ -22,8 +22,8 @@ where e.JobTitle = 'Stocker';
 go
 
 /*
- *Вывести на экран информацию обо всех сотрудниках, с указанием отдела, в котором они работают в настоящий момент.
- *В названии позиции каждого сотрудника заменить слово ‘and’ знаком & (амперсанд).
+ *В¬С‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР±Рѕ РІСЃРµС… СЃРѕС‚СЂСѓРґРЅРёРєР°С…, СЃ СѓРєР°Р·Р°РЅРёРµРј РѕС‚РґРµР»Р°, РІ РєРѕС‚РѕСЂРѕРј РѕРЅРё СЂР°Р±РѕС‚Р°СЋС‚ РІ РЅР°СЃС‚РѕВ¤С‰РёР№ РјРѕРјРµРЅС‚.
+ *В¬ РЅР°Р·РІР°РЅРёРё РїРѕР·РёС†РёРё РєР°Р¶РґРѕРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєР° Р·Р°РјРµРЅРёС‚СЊ СЃР»РѕРІРѕ РЎandРў Р·РЅР°РєРѕРј & (Р°РјРїРµСЂСЃР°РЅРґ).
 */
 select e.BusinessEntityID, replace(e.JobTitle, 'and', '&') "JobTitle", d.Name "DepName" from HumanResources.Employee as e
 inner join HumanResources.EmployeeDepartmentHistory as edh on e.BusinessEntityID = edh.BusinessEntityID
