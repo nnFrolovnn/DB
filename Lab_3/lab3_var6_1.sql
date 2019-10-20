@@ -1,16 +1,16 @@
-use AdventureWorks2012;
+п»їuse AdventureWorks2012;
 go
 
 /*
- *a) добавьте в таблицу dbo.Person поле EmailAddress типа nvarchar размерностью 50 символов;
+ *a) РґРѕР±Р°РІСЊС‚Рµ РІ С‚Р°Р±Р»РёС†Сѓ dbo.Person РїРѕР»Рµ EmailAddress С‚РёРїР° nvarchar СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ 50 СЃРёРјРІРѕР»РѕРІ;
 */
 alter table dbo.Person 
 add EmailAddress nvarchar(50) NULL;
 go
 
 /*
- *b) объявите табличную переменную с такой же структурой как dbo.Person и 
- *заполните ее данными из dbo.Person. Поле EmailAddress заполните данными из Person.EmailAddress;
+ *b) РѕР±СЉСЏРІРёС‚Рµ С‚Р°Р±Р»РёС‡РЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЃ С‚Р°РєРѕР№ Р¶Рµ СЃС‚СЂСѓРєС‚СѓСЂРѕР№ РєР°Рє dbo.Person Рё 
+ *Р·Р°РїРѕР»РЅРёС‚Рµ РµРµ РґР°РЅРЅС‹РјРё РёР· dbo.Person. С•РѕР»Рµ EmailAddress Р·Р°РїРѕР»РЅРёС‚Рµ РґР°РЅРЅС‹РјРё РёР· Person.EmailAddress;
 */
 declare @Person_variable table(
 	BusinessEntityID int NOT NULL,
@@ -35,8 +35,8 @@ from dbo.Person as p
 inner join Person.EmailAddress as e on e.BusinessEntityID = p.BusinessEntityID;
 
 /*
- *c) обновите поле EmailAddress в dbo.Person данными из табличной переменной,
- *убрав из адреса все встречающиеся нули;
+ *c) РѕР±РЅРѕРІРёС‚Рµ РїРѕР»Рµ EmailAddress РІ dbo.Person РґР°РЅРЅС‹РјРё РёР· С‚Р°Р±Р»РёС‡РЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№,
+ *СѓР±СЂР°РІ РёР· Р°РґСЂРµСЃР° РІСЃРµ РІСЃС‚СЂРµС‡Р°СЋС‰РёРµСЃСЏ РЅСѓР»Рё;
 */
 update dbo.Person
 set dbo.Person.EmailAddress = replace(pv.EmailAddress, '0', '')
@@ -44,8 +44,8 @@ from @Person_variable as pv;
 go
 
 /*
- *d) удалите данные из dbo.Person, 
- *для которых тип контакта в таблице PhoneNumberType равен ‘Work’;
+ *d) СѓРґР°Р»РёС‚Рµ РґР°РЅРЅС‹Рµ РёР· dbo.Person, 
+ *РґР»СЏ РєРѕС‚РѕСЂС‹С… С‚РёРї РєРѕРЅС‚Р°РєС‚Р° РІ С‚Р°Р±Р»РёС†Рµ PhoneNumberType СЂР°РІРµРЅ РЎWorkРў;
 */
 delete p
 from dbo.Person as p
@@ -55,8 +55,8 @@ where phnt.Name = 'Work';
 go
 
 /*
- *e) удалите поле EmailAddress из таблицы, 
- *удалите все созданные ограничения и значения по умолчанию.
+ *e) СѓРґР°Р»РёС‚Рµ РїРѕР»Рµ EmailAddress РёР· С‚Р°Р±Р»РёС†С‹, 
+ *СѓРґР°Р»РёС‚Рµ РІСЃРµ СЃРѕР·РґР°РЅРЅС‹Рµ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ Рё Р·РЅР°С‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
 */
 alter table dbo.Person drop column EmailAddress;
 alter table dbo.Person drop constraint ValueType;
@@ -64,7 +64,7 @@ alter table dbo.Person drop constraint TitleDefaultValue;
 go
 
 /*
- *f) удалите таблицу dbo.Person.
+ *f) СѓРґР°Р»РёС‚Рµ С‚Р°Р±Р»РёС†Сѓ dbo.Person.
 */
 drop table dbo.Person;
 go
