@@ -13,23 +13,11 @@ go
 create procedure dbo.GetCreditCards(@CreditCardsXML XML)
 as
 begin
-	drop table if exists #result;
-
-    create table #result
-    (
-        CreditCardID int,
-        CardType varchar(50),
-        CardNumber varchar(25)
-    )
-
-    insert #result
-    select 
+	select 
 		x.value('@ID', 'int') as CreditCardID,
         x.value('@Type', 'varchar(50)') as CardType ,
         x.value('@Number', 'varchar(25)') as CardNumber
-    from @CreditCardsXML.nodes('/CreditCards/Card') XmlData(x)
-
-    select * from #result;
+    from @CreditCardsXML.nodes('/CreditCards/Card') XmlData(x);
 end;
 go
 	
